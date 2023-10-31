@@ -1,5 +1,17 @@
 <template>
   <div id="app">
+    <main>
+      <!--Searchbox-->
+      <div class="search-box">
+        <input 
+          type="text" 
+          class="search-bar" 
+          placeholder="Search for a Place..."
+          v-model="query"
+          @keypress="fetchWeather"
+        />
+      </div>
+    </main>
   </div>
 </template>
 
