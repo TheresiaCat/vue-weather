@@ -25,8 +25,8 @@
       </div>
 
       <!--Weather Information-->
-      <div class="weather-box">
-          <div class="temp">20°c</div>
+      <div class="weather-box" v-if="typeof weather.main != 'undefined'">
+          <div class="temp">{{weather.main.temp.toFixed(0)}}°c</div>
           <div class="weather">Sunshine</div>
     </div>
     </main>
@@ -53,7 +53,7 @@ export default {
   methods: {
     fetchWeather (e) {
       if (e.key == "Enter")
-      fetch(`${this.url_base}weather?q=${this.query}&APPID=${this.api_key}`)
+      fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
           .then(response => {
             return response.json();
           }).then(this.setResults);
