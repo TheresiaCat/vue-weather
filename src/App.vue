@@ -20,7 +20,7 @@
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
-          <div class="date">01.11.2023</div>
+          <div class="date">{{ getCurrentDate() }}</div>
         </div>  
       </div>
 
@@ -47,10 +47,12 @@ export default {
     }
   },
 
-  //e is event 
-  //start by hitting Enter 
-  //get response in json
+  
   methods: {
+    // Method to get todays weather Data
+    //e is event 
+    //start by hitting Enter 
+    //get response in json
     fetchWeather (e) {
       if (e.key == "Enter")
       fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
@@ -60,6 +62,19 @@ export default {
     },
     setResults (results) {
       this.weather = results;
+    },
+
+    // Method to get todays Date 
+    getCurrentDate() {
+      const today = new Date();
+      const day = today.getDate();
+      const month = today.getMonth() + 1; // Months are based on 0
+      const year = today.getFullYear();
+
+      // Format (z.B. 01.11.2023)
+      const formattedDate = `${day.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`;
+      
+      return formattedDate;
     },
   }
 }
