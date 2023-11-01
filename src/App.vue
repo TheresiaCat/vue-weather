@@ -2,25 +2,26 @@
   <div id="app">
     <main>
       <!--Searchbox-->
+      <!--@ is short version of v-on-->
       <div class="search-box">
         <input 
           type="text" 
           class="search-bar" 
           placeholder="Search for a Place..."
           v-model="query"
+          @keypress="fetchWeather"
         />
-
-        {{ query }}
       </div>
 
       
 
       <!--General Information-->
-      <div class="weather-wrap">
+      <!--Important to use the same variables as the API response see https://openweathermap.org/current-->
+      <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
-          <div class="location">Mosbach, DE</div>
+          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
           <div class="date">01.11.2023</div>
-      </div>  
+        </div>  
       </div>
 
       <!--Weather Information-->
@@ -36,14 +37,30 @@
 export default {
   name: 'App', 
   
-  //Gibt Objekt zurück mit den Daten von der API
+  //Get Object back
   data () {
     return {
-      api_key: '87ecc09b44dd66f2699a03e91094bc23',
+      api_key: '4a9c3f1322b526b57e2c80a1e33c49e4',
       url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
-      weather: {}
+      weather: {} //default empty object
     }
+  },
+
+  //e is event 
+  //start by hitting Enter 
+  //get response in json
+  methods: {
+    fetchWeather (e) {
+      if (e.key == "Enter")
+      fetch(`${this.url_base}weather?q=${this.query}&APPID=${this.api_key}`)
+          .then(response => {
+            return response.json();
+          }).then(this.setResults);
+    },
+    setResults (results) {
+      this.weather = results;
+    },
   }
 }
 </script>
