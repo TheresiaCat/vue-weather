@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
+  <div id="app" :class="getBackgroundClass()">
     <main>
       <!--Searchbox-->
       <!--@ is short version of v-on-->
@@ -76,7 +76,26 @@ export default {
       
       return formattedDate;
     },
+
+    getBackgroundClass() {
+    if (typeof this.weather.main != 'undefined') {
+      const temp = this.weather.main.temp;
+      if (temp <= 0) {
+        return 'verycold';
+      } else if (temp > 0 && temp <= 11) {
+        return 'cold';
+      } else if (temp > 11 && temp <= 21) {
+        return 'medium';
+      } else if (temp > 21 && temp <= 30) {
+        return 'warm';
+      } else {
+        return 'verywarm';
+      }
+    } else {
+      return '';
+    }
   }
+}, 
 }
 </script>
 
