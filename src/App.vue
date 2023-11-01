@@ -13,8 +13,6 @@
         />
       </div>
 
-      
-
       <!--General Information-->
       <!--Important to use the same variables as the API response see https://openweathermap.org/current-->
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
@@ -28,7 +26,12 @@
       <div class="weather-box" v-if="typeof weather.main != 'undefined'">
           <div class="temp">{{weather.main.temp.toFixed(0)}}°c</div>
           <div class="weather">{{ weather.weather[0].description }}</div>
-    </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" v-if="typeof weather.main === 'undefined' && query.length > 0">
+        City not found. Please try again.
+      </div>
     </main>
   </div>
 </template>
@@ -207,5 +210,20 @@ main {
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.error-message {
+  font-size: 48px;
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+
+  display: inline-block;
+  padding: 10px 25px;
+  color: #ffffff;
+
+  background-color:rgba(255, 0, 0, 0.5);
+  border-radius: 16px;
+  margin: 30px 0px;
 }
 </style>
