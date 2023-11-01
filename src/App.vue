@@ -27,7 +27,7 @@
       <!--Weather Information-->
       <div class="weather-box" v-if="typeof weather.main != 'undefined'">
           <div class="temp">{{weather.main.temp.toFixed(0)}}°c</div>
-          <div class="weather">Sunshine</div>
+          <div class="weather">{{ weather.weather[0].description }}</div>
     </div>
     </main>
   </div>
