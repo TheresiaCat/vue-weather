@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 16 ? 'warm' : ''">
     <main>
       <!--Searchbox-->
       <!--@ is short version of v-on-->
@@ -92,10 +92,24 @@ body {
 }
 
 #app {
-  background-image: url('./assets/cold-bg.jpg');
+  background-image: url('./assets/medium-bg.jpg');
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
+}
+#app.verycold {
+  background-image: url('./assets/verycold-bg.jpg');
+}
+#app.cold {
+  background-image: url('./assets/cold-bg.jpg');
+}
+
+#app.warm {
+  background-image: url('./assets/warm-bg.jpg');
+}
+
+#app.verywarm {
+  background-image: url('./assets/verywarm-bg.jpg');
 }
 
 main {
