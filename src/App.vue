@@ -11,6 +11,20 @@
           @keypress="fetchWeather"
         />
       </div>
+
+      <!--General Information-->
+      <div class="weather-wrap">
+        <div class="location-box">
+          <div class="location">Mosbach, DE</div>
+          <div class="date">01.11.2023</div>
+      </div>  
+      </div>
+
+      <!--Weather Information-->
+      <div class="weather-box">
+          <div class="temp">20°c</div>
+          <div class="weather">Sunshine</div>
+    </div>
     </main>
   </div>
 </template>
